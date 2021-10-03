@@ -12,3 +12,5 @@ comes with absolutely no warranties. To contact the author, send an e-mail to `c
 ## requirements / installation
 
 `sbt run`
+
+`sbt 'runMain de.sciss.tf.CnnTest 10 100 sgd'`
