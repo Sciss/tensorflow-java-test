@@ -11,6 +11,8 @@ comes with absolutely no warranties. To contact the author, send an e-mail to `c
 
 ## requirements / installation
 
+The project build with [sbt](https://www.scala-sbt.org/). You may need to edit `build.sbt` to adjust `tfClassifer`.
+
 `sbt run`
 
 `sbt 'runMain de.sciss.tf.CnnTest 10 100 sgd'`
