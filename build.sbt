@@ -1,10 +1,11 @@
 lazy val deps = new {
+  val keras       = "0.1.0-SNAPSHOT"
   val log         = "0.1.1"
   val tensorflow  = "0.3.3"
 }
 
 // change this according to your OS and CPU
-val tfClassifer = "linux-x86_64"
+val tfClassifier = "linux-x86_64"
 
 lazy val root = project.in(file("."))
   .settings(
@@ -14,8 +15,9 @@ lazy val root = project.in(file("."))
     scalaVersion  := "3.0.2",
     libraryDependencies ++= Seq(
       "de.sciss"        %% "log"                  % deps.log,
+      "de.sciss"        %% "tensorflow-keras"     % deps.keras,
       "org.tensorflow"  %  "tensorflow-core-api"  % deps.tensorflow,
-      "org.tensorflow"  %  "tensorflow-core-api"  % deps.tensorflow classifier tfClassifer, // "linux-x86_64-mkl",
+      "org.tensorflow"  %  "tensorflow-core-api"  % deps.tensorflow classifier tfClassifier, // "linux-x86_64-mkl",
       "org.tensorflow"  %  "tensorflow-framework" % deps.tensorflow,
     )
   )
