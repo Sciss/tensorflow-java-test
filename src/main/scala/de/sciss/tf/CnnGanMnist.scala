@@ -49,7 +49,7 @@ object CnnGanMnist:
     val model = Sequential.of(classOf[TFloat32],
       Layers.input(100),
       Layers.dense(7*7*256), // , /*Dense.Options.builder()*/ use_bias=false),
-      ???, // Layers.batchNormalization(),
+      Layers.batchNormalization(),
       Layers.leakyReLU(),
 
       ???, // Layers.reshape((7, 7, 256)),
@@ -57,12 +57,12 @@ object CnnGanMnist:
 
       ???, // Layers.conv2DTranspose(128, (5, 5), strides=(1, 1), padding="same", use_bias=false),
       // assert (model.output_shape == (None, 7, 7, 128))
-      ???, // Layers.batchNormalization(),
+      Layers.batchNormalization(),
       Layers.leakyReLU(),
 
       ???, // Layers.conv2DTranspose(64, (5, 5), strides=(2, 2), padding="same", use_bias=false),
       // assert (model.output_shape == (None, 14, 14, 64))
-      ???, // Layers.batchNormalization(),
+      Layers.batchNormalization(),
       Layers.leakyReLU(),
 
       ???, // Layers.conv2DTranspose(1, (5, 5), strides=(2, 2), padding="same", use_bias=false, activation="tanh"),
@@ -74,17 +74,11 @@ object CnnGanMnist:
   def makeDiscriminatorModel(): Model[TFloat32] =
     Sequential.of(classOf[TFloat32],
       Layers.input(28, 28, 1),
-      Layers.conv2D(64, Seq(5, 5), Conv2D.Options(
-        strides = Seq(2, 2),
-        padding = Conv.Padding.Same,
-      )),
+      Layers.conv2D( 64, (5, 5), strides = (2, 2), padding = Conv.Padding.Same),
       Layers.leakyReLU(),
       Layers.dropout(0.3),
 
-      Layers.conv2D(128, Seq(5, 5), Conv2D.Options(
-        strides = Seq(2, 2),
-        padding = Conv.Padding.Same,
-      )),
+      Layers.conv2D(128, (5, 5), strides = (2, 2), padding = Conv.Padding.Same),
       Layers.leakyReLU(),
       Layers.dropout(0.3),
 
