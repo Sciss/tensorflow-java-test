@@ -15,9 +15,7 @@ import scala.collection.JavaConverters.seqAsJavaListConverter
 // implementation following this tutorial: https://www.tensorflow.org/tutorials/generative/dcgan
 object CnnGanMnist:
   def main(args: Array[String]): Unit =
-    val pair      = keras.datasets.MNIST.graphLoaders
-    val trainLoad = pair.first()
-    val testLoad  = pair.second()
+    val (trainLoad, testLoad) = keras.datasets.MNIST.graphLoaders
 
     println("makeGeneratorModel")
     val generator = makeGeneratorModel()
