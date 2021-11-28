@@ -15,7 +15,7 @@ import scala.collection.JavaConverters.seqAsJavaListConverter
 // implementation following this tutorial: https://www.tensorflow.org/tutorials/generative/dcgan
 object CnnGanMnist:
   def main(args: Array[String]): Unit =
-    val pair      = keras.datasets.MNIST.graphLoaders()
+    val pair      = keras.datasets.MNIST.graphLoaders
     val trainLoad = pair.first()
     val testLoad  = pair.second()
 
@@ -46,9 +46,9 @@ object CnnGanMnist:
   final val BATCH_SIZE  = 256
 
   def makeGeneratorModel(): Model[TFloat32] =
-    val model = Sequential.of(classOf[TFloat32],
+    val model = Sequential(classOf[TFloat32],
       Layers.input(100),
-      Layers.dense(7*7*256), // , /*Dense.Options.builder()*/ use_bias=false),
+      Layers.dense(7*7*256, useBias = false),
       Layers.batchNormalization(),
       Layers.leakyReLU(),
 
@@ -72,7 +72,7 @@ object CnnGanMnist:
   end makeGeneratorModel
 
   def makeDiscriminatorModel(): Model[TFloat32] =
-    Sequential.of(classOf[TFloat32],
+    Sequential(classOf[TFloat32],
       Layers.input(28, 28, 1),
       Layers.conv2D( 64, (5, 5), strides = (2, 2), padding = Conv.Padding.Same),
       Layers.leakyReLU(),
