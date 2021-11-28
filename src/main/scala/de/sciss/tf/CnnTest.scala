@@ -36,12 +36,13 @@ import scala.collection.JavaConverters.*
   * originally published under Apache 2.0 license
   */
 object CnnTest:
+  // check https://github.com/tensorflow/java-models/commit/ed75c1c1681c7f1e8b225c4d46d29741829e9929
+
   val INPUT_NAME    = "input"
   val OUTPUT_NAME   = "output"
   val TARGET        = "target"
   val TRAIN         = "train"
   val TRAINING_LOSS = "training_loss"
-  val INIT          = "init"
 
   val IMAGE_SIZE    = 28
   val NUM_CHANNELS  = 1
@@ -153,7 +154,7 @@ object CnnTest:
 
     // ---- loss function and regularization ----
     val hot           = oneHot(labels, constant(10), constant(1.0f), constant(0.0f))
-    val batchLoss     = nn.raw.softmaxCrossEntropyWithLogits(logits, hot)
+    val batchLoss     = nn.softmaxCrossEntropyWithLogits(logits, hot)
     val labelLoss     = math.mean(batchLoss.loss, constant(0))
     val regularizers  = math.add(
       nn.l2Loss(fc1Weights),
@@ -184,15 +185,12 @@ object CnnTest:
     logger.info(s"Optimizer = $optimizer")
     /*val minimize =*/ optimizer.minimize(loss, TRAIN)
 
-    init()
+    // init()
     g
 
   end build
 
   def train(session: Session, epochs: Int, minibatchSize: Int, dataset: MnistDataset): Unit =
-    // Initialises the parameters.
-    session.runner.addTarget(INIT).run
-    logger.info("Initialised the model parameters")
     var interval = 0
     // Train the model
     for epoch <- 0 until epochs do
