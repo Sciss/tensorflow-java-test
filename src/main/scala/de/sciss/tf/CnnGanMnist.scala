@@ -1,7 +1,7 @@
 package de.sciss.tf
 
 import org.tensorflow.{Graph, Operand, keras}
-import org.tensorflow.keras.layers.{Conv, Conv2D, Dense, Layers}
+import org.tensorflow.keras.layers.{BatchNormalization, Conv, Conv2D, Dense, Layer, Layers}
 import org.tensorflow.keras.losses.Losses
 import org.tensorflow.keras.metrics.Metrics
 import org.tensorflow.keras.models.{Model, Sequential}
