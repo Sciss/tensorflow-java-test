@@ -10,7 +10,7 @@ import org.tensorflow.ndarray.Shape
 import org.tensorflow.op.Ops
 import org.tensorflow.types.{TFloat32, TInt32}
 
-import scala.collection.JavaConverters.seqAsJavaListConverter
+import scala.jdk.CollectionConverters.*
 
 // implementation following this tutorial: https://www.tensorflow.org/tutorials/generative/dcgan
 object CnnGanMnist:
