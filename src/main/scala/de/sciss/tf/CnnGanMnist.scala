@@ -46,7 +46,8 @@ object CnnGanMnist:
 
   def makeGeneratorModel(): Model[TFloat32] =
     val model = Sequential(classOf[TFloat32],
-      Layers.input(100),
+//      Layers.input(Shape.of(100)),
+      Layers.input(Shape.of(100), batchSize = 10),    // XXX TODO: tutorial doesn't specify batch size
       Layers.dense(7*7*256, useBias = false),
       Layers.batchNormalization(),
       Layers.leakyReLU(),
@@ -74,7 +75,7 @@ object CnnGanMnist:
 
   def makeDiscriminatorModel(): Model[TFloat32] =
     Sequential(classOf[TFloat32],
-      Layers.input(28, 28, 1),
+      Layers.input(Shape.of(28, 28, 1)),
       Layers.conv2D( 64, (5, 5), strides = (2, 2), padding = Conv.Padding.Same),
       Layers.leakyReLU(),
       Layers.dropout(0.3),
