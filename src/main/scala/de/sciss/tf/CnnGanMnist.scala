@@ -1,5 +1,6 @@
 package de.sciss.tf
 
+import org.tensorflow.keras.activations.Activations
 import org.tensorflow.{Graph, Operand, keras}
 import org.tensorflow.keras.layers.{BatchNormalization, Conv, Conv2D, Dense, Layer, Layers}
 import org.tensorflow.keras.losses.Losses
@@ -50,20 +51,22 @@ object CnnGanMnist:
       Layers.batchNormalization(),
       Layers.leakyReLU(),
 
-      ???, // Layers.reshape((7, 7, 256)),
+      Layers.reshape(Shape.of(7, 7, 256)),
       // assert (model.output_shape == (None, 7, 7, 256))  // Note: None is the batch size
 
-      ???, // Layers.conv2DTranspose(128, (5, 5), strides=(1, 1), padding="same", use_bias=false),
+      Layers.conv2DTranspose(128, (5, 5), strides = (1, 1), padding = Conv.Padding.Same, useBias = false),
       // assert (model.output_shape == (None, 7, 7, 128))
       Layers.batchNormalization(),
       Layers.leakyReLU(),
 
-      ???, // Layers.conv2DTranspose(64, (5, 5), strides=(2, 2), padding="same", use_bias=false),
+      Layers.conv2DTranspose(64, (5, 5), strides = (2, 2), padding = Conv.Padding.Same, useBias = false),
       // assert (model.output_shape == (None, 14, 14, 64))
       Layers.batchNormalization(),
       Layers.leakyReLU(),
 
-      ???, // Layers.conv2DTranspose(1, (5, 5), strides=(2, 2), padding="same", use_bias=false, activation="tanh"),
+      Layers.conv2DTranspose(1, (5, 5), strides = (2, 2), padding = Conv.Padding.Same, useBias = false,
+        activation = Some(Activations.tanh)
+      ),
     )
     // assert (model.output_shape == (None, 28, 28, 1))
     model

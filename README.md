@@ -15,10 +15,15 @@ The project build with [sbt](https://www.scala-sbt.org/). You may need to edit `
 
 Furthermore, for Keras models, it currently relies on an unstable version
 of [tensorflow-keras-scala](https://codeberg.org/sciss/tensorflow-keras-scala) (bindings). To prepare them, clone
-that repository, and within use `sbt +publishLocal` to make an unstable version available to this build.
+that repository, and within use `git checkout work` and `sbt +publishLocal` to make an unstable version available to
+this build.
 
 Then here,
 
 `sbt run`
 
 `sbt 'runMain de.sciss.tf.CnnTest 10 100 sgd'`
+
+Unfinished:
+
+`sbt 'runMain de.sciss.tf.CnnGanMnist'`
